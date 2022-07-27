@@ -1,39 +1,40 @@
 class Solution {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> dg = new ArrayList<>();
-        for(int i = 0 ; i < numCourses; i++){
-            dg.add(new ArrayList<>());
-        }
-        for(int[] pre : prerequisites){
-            dg.get(pre[0]).add(pre[1]);
-        }
-        boolean[] visited = new boolean[numCourses];  
-boolean[] memo = new boolean[numCourses];  
-        for(int i = 0; i < numCourses; i++){
-
-            // if(!visited[i]){
-                          
-                if(!dfs(visited, dg, i, memo)) return false;
-            memo[i] = true;
-            // }
-        }
-        return true;
-    }
     
-    public boolean dfs(boolean[] visited, List<List<Integer>> dg, int i, boolean[] memo){
-        if(visited[i]) return false;
-        visited[i] = true;
-        for(int j: dg.get(i)){
-            if(memo[j]) continue;
-            if(!dfs(visited, dg, j, memo)){
-                return false;
+    private static int count;
+    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        count = 0;
+        int indegrees[] = new int[numCourses];
+        List<List<Integer>>adjacencyList = new ArrayList();
+        Deque<Integer> queue = new ArrayDeque();
+        for(int i = 0; i < numCourses; i++)
+            adjacencyList.add(new ArrayList<>());
+        // create adjacency list
+        for(int[] prereq : prerequisites){
+            adjacencyList.get(prereq[1]).add(prereq[0]);
+            indegrees[prereq[0]]++;
+        }
+        
+        for(int i = 0; i < numCourses; i++){
+            if(indegrees[i] == 0)
+                queue.offerLast(i);
+        }
+        
+        while(!queue.isEmpty()){
+            int node = queue.pollFirst();
+            
+            count++;
+            for(int neighbour : adjacencyList.get(node)){
+                indegrees[neighbour]--;
+                if(indegrees[neighbour] == 0){
+                    queue.offerLast(neighbour);
+                }
             }
         }
-        
-        visited[i] = false;
-        
-        return true;
+        return count == numCourses;
     }
+    
+    
     
     
 }
