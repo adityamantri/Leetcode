@@ -1,18 +1,30 @@
 class Solution {
     public int constrainedSubsetSum(int[] nums, int k) {
-        int ans = nums[0];
-        PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> b[0] - a[0]);
-        heap.offer(new int[]{nums[0], 0});
+        // int ans = nums[0];
+        TreeMap<Integer, Integer> window = new TreeMap();
+        window.put(0, 0);
+        int dp[] = new int[nums.length];
+        // PriorityQueue<int[]> heap = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        // heap.offer(new int[]{nums[0], 0});
 
-        for(int i = 1; i < nums.length; i++){
+        for(int i = 0; i < nums.length; i++){
             // remove extra elements from heap
-            while(i - heap.peek()[1] > k){
-                heap.poll();
+            dp[i] = nums[i] + window.lastKey();
+            window.put(dp[i], window.getOrDefault(dp[i], 0)+1);
+            
+            if(i >= k){
+                window.put(dp[i-k], window.get(dp[i-k])-1);
+                if(window.get(dp[i-k]) == 0){
+                    window.remove(dp[i-k]);
+                }
             }
-            int curr = nums[i] + Math.max(0, heap.peek()[0]);
-            heap.offer(new int[]{curr, i});
-            ans = Math.max(curr, ans);
         }
+
+        int ans = Integer.MIN_VALUE;
+        for(int num : dp){
+            ans = Math.max(ans, num);
+        }
+
         return ans;
     }
 }
