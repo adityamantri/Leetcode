@@ -93,6 +93,6 @@ class Solution {
         if(n == 0) return;
         if(!res.isEmpty()) res.append(" ");
         res.append(three(n));
-        res.append(""+value);
+        res.append(value);
     }
 }
