@@ -1,14 +1,36 @@
 class Solution {
     public int romanToInt(String s) {
-        Map<Character, Integer> map = Map.of('I', 1, 'V', 5, 'X', 10, 'L', 50, 'C', 100,
-                                            'D', 500, 'M', 1000);
-        int prev = 0, res = 0;
-        for(int i = s.length()-1; i >= 0; i--){
-            char c = s.charAt(i);
-            int num = map.get(c);
-            res += num < prev ? -num : num;
+        int prev = 0, num = 0, ans = 0;
+        for(char c : s.toCharArray()){
+            switch(c){
+                case 'I': 
+                    num = 1; 
+                    break;
+                case 'V': 
+                    num = 5; 
+                    break;
+                case 'X': 
+                    num = 10; 
+                    break;
+                case 'L': 
+                    num = 50; 
+                    break;
+                case 'C': 
+                    num = 100; 
+                    break;
+                case 'D': 
+                    num = 500; 
+                    break;
+                case 'M': 
+                    num = 1000; 
+                    break;
+            }
+            if(prev < num){
+                ans -= (prev + prev);
+            }
+            ans += num;
             prev = num;
         }
-        return res;
+        return ans;
     }
 }
