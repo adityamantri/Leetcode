@@ -1,37 +1,32 @@
 class Solution {
     public String minWindow(String s, String t) {
-        if(t.length() > s.length()) return "";
+        int left = 0, right = 0, minStart = 0, minLen = s.length() + 1, count = t.length();
+        if(s.length() < t.length()) return "";
         int[] arr = new int[128];
-        int left = 0, right = 0;
-        int start = 0;
-        int minWindow = s.length()+1;
-        int count = t.length();
-        // calculate t_map
         for(char c : t.toCharArray()){
             arr[c-'A']++;
         }
-
-        // loop over each char
+        
         while(right < s.length()){
             char c = s.charAt(right);
             if(arr[c-'A']-- > 0){
                 count--;
             }
-
+            right++;
             while(count == 0){
-                if(minWindow > right-left+1){
-                    start = left;
-                    minWindow = right-left+1;
+                
+                if(minLen > right - left){
+                    minLen = right-left;
+                    minStart = left;
                 }
-                if(arr[s.charAt(left) - 'A']++ == 0){
+                
+                char l = s.charAt(left);
+                if(arr[l - 'A']++ == 0){
                     count++;
                 }
                 left++;
             }
-            right++;
         }
-
-        if(minWindow == s.length()+1) return "";
-        return s.substring(start, start+minWindow);
+        return (minLen == s.length()+1) ? "" : s.substring(minStart, minStart+minLen);
     }
 }
