@@ -79,3 +79,18 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0633-sum-of-square-numbers](https://github.com/adityamantri/Leetcode/tree/master/0633-sum-of-square-numbers) |
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Array
+|  |
+| ------- |
+| [1720-crawler-log-folder](https://github.com/adityamantri/Leetcode/tree/master/1720-crawler-log-folder) |
+## String
+|  |
+| ------- |
+| [1720-crawler-log-folder](https://github.com/adityamantri/Leetcode/tree/master/1720-crawler-log-folder) |
+## Stack
+|  |
+| ------- |
+| [1720-crawler-log-folder](https://github.com/adityamantri/Leetcode/tree/master/1720-crawler-log-folder) |
+<!---LeetCode Topics End-->
