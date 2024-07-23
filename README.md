@@ -86,6 +86,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [1207-delete-nodes-and-return-forest](https://github.com/adityamantri/Leetcode/tree/master/1207-delete-nodes-and-return-forest) |
 | [1720-crawler-log-folder](https://github.com/adityamantri/Leetcode/tree/master/1720-crawler-log-folder) |
+| [1741-sort-array-by-increasing-frequency](https://github.com/adityamantri/Leetcode/tree/master/1741-sort-array-by-increasing-frequency) |
 | [2502-sort-the-people](https://github.com/adityamantri/Leetcode/tree/master/2502-sort-the-people) |
 | [2846-robot-collisions](https://github.com/adityamantri/Leetcode/tree/master/2846-robot-collisions) |
 ## String
@@ -113,6 +114,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0726-number-of-atoms](https://github.com/adityamantri/Leetcode/tree/master/0726-number-of-atoms) |
+| [1741-sort-array-by-increasing-frequency](https://github.com/adityamantri/Leetcode/tree/master/1741-sort-array-by-increasing-frequency) |
 | [2502-sort-the-people](https://github.com/adityamantri/Leetcode/tree/master/2502-sort-the-people) |
 | [2846-robot-collisions](https://github.com/adityamantri/Leetcode/tree/master/2846-robot-collisions) |
 ## Simulation
@@ -124,6 +126,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0726-number-of-atoms](https://github.com/adityamantri/Leetcode/tree/master/0726-number-of-atoms) |
 | [1207-delete-nodes-and-return-forest](https://github.com/adityamantri/Leetcode/tree/master/1207-delete-nodes-and-return-forest) |
+| [1741-sort-array-by-increasing-frequency](https://github.com/adityamantri/Leetcode/tree/master/1741-sort-array-by-increasing-frequency) |
 | [2502-sort-the-people](https://github.com/adityamantri/Leetcode/tree/master/2502-sort-the-people) |
 ## Tree
 |  |
