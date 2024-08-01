@@ -84,6 +84,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 |  |
 | ------- |
+| [0303-range-sum-query-immutable](https://github.com/adityamantri/Leetcode/tree/master/0303-range-sum-query-immutable) |
 | [0948-sort-an-array](https://github.com/adityamantri/Leetcode/tree/master/0948-sort-an-array) |
 | [1207-delete-nodes-and-return-forest](https://github.com/adityamantri/Leetcode/tree/master/1207-delete-nodes-and-return-forest) |
 | [1720-crawler-log-folder](https://github.com/adityamantri/Leetcode/tree/master/1720-crawler-log-folder) |
@@ -178,4 +179,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1756-minimum-deletions-to-make-string-balanced](https://github.com/adityamantri/Leetcode/tree/master/1756-minimum-deletions-to-make-string-balanced) |
+## Design
+|  |
+| ------- |
+| [0303-range-sum-query-immutable](https://github.com/adityamantri/Leetcode/tree/master/0303-range-sum-query-immutable) |
+## Prefix Sum
+|  |
+| ------- |
+| [0303-range-sum-query-immutable](https://github.com/adityamantri/Leetcode/tree/master/0303-range-sum-query-immutable) |
 <!---LeetCode Topics End-->
