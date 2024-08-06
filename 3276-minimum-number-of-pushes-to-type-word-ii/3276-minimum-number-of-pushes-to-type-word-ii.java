@@ -4,15 +4,16 @@ class Solution {
         for(char c : word.toCharArray()){
             arr[c - 'a']++;
         }
-        arr = Arrays.stream(arr)
-            .boxed()
-            .sorted(Collections.reverseOrder())
-            .mapToInt(Integer::intValue)
-            .toArray();
+        // arr = Arrays.stream(arr)
+        //     .boxed()
+        //     .sorted(Collections.reverseOrder())
+        //     .mapToInt(Integer::intValue)
+        //     .toArray();
+        Arrays.sort(arr);
         int res = 0;
         for(int j = 0; j < 26; j++){
-            if(arr[j] > 0){
-                res += (j/8 + 1) * arr[j];
+            if(arr[25-j] > 0){
+                res += (j/8 + 1) * arr[25-j];
             }else{
                 break;
             }
