@@ -1,32 +1,31 @@
 class Solution {
-
     public int myAtoi(String s) {
-        s = s.trim(); // rule 1
-        int n = s.length();
-        long res = 0;
-        if(n == 0) return 0; // empty string
-        int sign = 1; 
-        int i = 0;
-        if(s.charAt(0) == '-'){
-            sign = -1;
-            i++;
-        }else if(s.charAt(0) == '+'){
-            i++;
-        }
-        
-        while(i < s.length() && Character.isDigit(s.charAt(i))){
-            int num = s.charAt(i)-'0';
-            
-            // check overflow and underflow
-            if(res > Integer.MAX_VALUE /10 || res == Integer.MAX_VALUE/10 && num > Integer.MAX_VALUE%10){
-                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        s = s.trim();
+        int sign = 1;
+        long result = 0;
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(i == 0 && (c == '+' || c == '-')){
+                if(c == '-') sign = -1;
+                continue;
             }
             
-            res *= 10;
-            res += num;
-            
-            i++;
+            if(Character.isDigit(c)){
+                // condition for overflow
+                
+                result = result * 10 + c - '0';
+                if(result*sign >= Integer.MAX_VALUE){
+                    return Integer.MAX_VALUE;
+                }else if (result*sign <= Integer.MIN_VALUE){
+                    return Integer.MIN_VALUE;
+                }
+            }else{
+                break;
+            }
         }
-        return (int) res*sign;
+        result = result * sign;
+        // System.out.println(result);
+        
+        return (int)result;
     }
 }
