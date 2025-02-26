@@ -14,8 +14,10 @@ class Solution {
                     k--;
                 }else{
                     res.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
+                    
                     j++;
                     k--;
+                    while(j < k && nums[j] == nums[j-1]) j++;
                 }
             }   
         }
