@@ -9,41 +9,44 @@
  * }
  */
 class Solution {
-    /**
-        1. find mid
-        2. reverse from mid
-        3. reconnect pointers in interleaving fashion from both heads until mid
-        4. mid.next = null
-     */
     public void reorderList(ListNode head) {
-        if(head == null || head.next == null) return;
-        // find mid
         ListNode slow = head, fast = head;
-        while(fast!= null && fast.next != null){
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        // reverse second half
-        ListNode ptr = slow, prev = null;
-        while(ptr != null){
-            ListNode next = ptr.next;
-            ptr.next = prev;
-            prev = ptr;
-            ptr = next;
+        // reverse starting slow
+        ListNode curr = slow;
+        ListNode prev = null;
+        // slow.next = null;
+        while(curr != null){
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
-        
-        // merge
-        ListNode second = prev, first = head;
-        while(second.next != null){
-            ListNode next = first.next;
-            first.next = second;
-            first = next;
-
-            next = second.next;
-            second.next = first;
-            second = next;
+        // slow is the last head
+        ListNode first = head, second = prev;
+        while(second.next != null && first.next != second){
+            ListNode fNext = first.next;
+            ListNode sNext = second.next;// 3, 3
+            first.next = second;//2->4
+            second.next = fNext;// 4->3
+            first = fNext;//3
+            second = sNext;//3
         }
-
     }
 }
+/**
+1. find mid of the list using slow and fast ptr
+2. reverse second half of the list
+3. we have 2 heads
+    Move ptr from last to 
+    while(start != end)
+    Node nextEnd = end.next;
+    Node nextStart = start.next;
+    start.next = end;
+    end.next = nextStart;
+    start = nextStart;
+    end = nextEnd;
+*/
