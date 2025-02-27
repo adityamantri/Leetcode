@@ -1,22 +1,16 @@
 class Solution {
-    
-    public boolean checkPalindrome(String s, int i, int j){
-        while(i < j){
-            if(s.charAt(i++) != s.charAt(j--)){
-                return false;
-            }
-        }
-        return true;
-    }
-
     public boolean validPalindrome(String s) {
-        int i = 0, j = s.length()-1;
-        while(i < j){
-            if(s.charAt(i) != s.charAt(j)){
-                return checkPalindrome(s, i+1, j) || checkPalindrome(s, i, j-1);
+        return isValid(s, 0, s.length()-1, 1);
+    }
+    
+    public boolean isValid(String s, int start, int end, int k){
+        if(start >= end) return true;
+        if(s.charAt(start) != s.charAt(end)){
+            if(k == 0){ return false;}
+            else if(k == 1){
+                return isValid(s, start+1, end, 0) || isValid(s, start, end-1, 0);
             }
-            i++; j--;
         }
-        return true;
+        return isValid(s, start+1, end-1, k);
     }
 }
