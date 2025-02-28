@@ -1,34 +1,33 @@
 class Solution {
-    Map<Character, String> map = Map.of('2', "abc",
-                                            '3', "def",
-                                            '4', "ghi",
-                                            '5', "jkl",
-                                            '6', "mno",
-                                            '7', "pqrs",
-                                            '8', "tuv",
-                                            '9', "wxyz"
-                                            );
-
-    public void backtrack(String digits, int idx, StringBuilder sb, List<String> res){
-        // base case
-        if(idx == digits.length()){
-            res.add(sb.toString());
-            return;
-        }
-
-        // recurse
-        char d = digits.charAt(idx);
-        for(char c : map.get(d).toCharArray()){
-            sb.append(c);
-            backtrack(digits, idx+1, sb, res);
-            sb.deleteCharAt(sb.length()-1);
-        }
+    Map<Character, String> map;
+    public List<String> letterCombinations(String digits) {
+        map = new HashMap<>();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        List<String> strs = new ArrayList<>();
+        if(digits.isEmpty()) return strs;
+        backtrack(digits, 0, strs, new StringBuilder());
+        return strs;
     }
     
-    public List<String> letterCombinations(String digits) {
-        List<String> res = new ArrayList<>();
-        if(digits.isEmpty()) return res;
-        backtrack(digits, 0, new StringBuilder(), res);
-        return res;
+    private void backtrack(String digits, int idx, List<String> strs, StringBuilder sb){
+        // base case
+        if(digits.length() == idx){
+            strs.add(sb.toString());
+            // sb.delete(sb.length()-1);
+            return;
+        }
+        
+        for(char c : map.get(digits.charAt(idx)).toCharArray()){
+            sb.append(c);
+            backtrack(digits, idx+1, strs, sb);
+            sb.deleteCharAt(idx);
+        }
     }
 }
