@@ -16,40 +16,32 @@
 class Solution {
     public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
-        Deque<Pair<TreeNode, Integer>> queue = new ArrayDeque<>();
-        Map<Integer, List<Integer>> colMap = new HashMap<>();
+        Map<Integer, List<Integer>> map = new HashMap<>();
         int minCol = 0, maxCol = 0;
-        queue.offer(new Pair(root, 0));
-
-        while(!queue.isEmpty()){
-            Pair<TreeNode, Integer> p = queue.poll();
-            TreeNode n = p.getKey();
-            int col = p.getValue();
-            if(n == null) continue;
-            
-            minCol = Math.min(minCol, col);
-            maxCol = Math.max(maxCol, col);
-
-            colMap.putIfAbsent(col, new ArrayList<>());
-            colMap.get(col).add(n.val);
-
-            queue.offer(new Pair(n.left, col-1));
-            queue.offer(new Pair(n.right, col+1));
+        int row = 0;
+        if(root == null) return res;
+        Queue<Pair<Integer, TreeNode>> q = new LinkedList<>();
+        q.offer(new Pair(0, root));
+        while(!q.isEmpty()){
+            int size = q.size();
+            while(size-- > 0){
+                Pair<Integer, TreeNode> p = q.poll();
+                int col = p.getKey();
+                minCol = Math.min(minCol, col);
+                maxCol = Math.max(maxCol, col);
+                TreeNode n = p.getValue();
+                map.computeIfAbsent(col, k-> new ArrayList<>()).add(n.val);
+                if(n.left != null){
+                    q.offer(new Pair(col-1, n.left));
+                }
+                if(n.right != null){
+                    q.offer(new Pair(col+1, n.right));
+                }
+            }
         }
-
         while(minCol <= maxCol){
-            res.add(colMap.get(minCol++));
+            res.add(map.get(minCol++));
         }
         return res;
     }
 }
-
-    // -1  0   1   2
-    //     3
-    // 9       20
-    //     15      7
-
-// 1. attach column numbers to nodes
-// 2. add the node.val to the columnMap<col_no, List(node.val)>
-// 3. Keep a track of min and max col idx while traversal
