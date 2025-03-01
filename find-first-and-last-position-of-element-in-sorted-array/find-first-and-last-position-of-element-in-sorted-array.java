@@ -1,21 +1,35 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        
-        int left = findLeft(nums, target, 0, nums.length);
-        if(left == nums.length || nums[left] != target)  return new int[]{-1, -1};
-        int right = findLeft(nums, target+1, left+1, nums.length);
-        return new int[]{left, right-1};
-    }
-    
-    public int findLeft(int[] nums, int target, int l, int r){
-        while(l < r){
-            int m = l + (r-l)/2;
-            if(nums[m] >= target){
-                r = m;
+        int left = 0, right = nums.length-1;
+        int start = -1;
+        // making start position
+        while(left <= right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] == target){
+                start = mid;
+                right = mid-1;
+            }else if(nums[mid] > target){
+                right = mid-1;
             }else{
-                l = m+1;
+                left = mid+1;
             }
         }
-        return l;
+        if(start == -1) return new int[]{-1,-1};
+        int end = -1;
+        left = 0; 
+        right = nums.length-1;
+        // making end position
+        while(left <= right){
+            int mid = left + (right-left)/2;
+            if(nums[mid] == target){
+                end = mid;
+                left = mid+1;
+            }else if(nums[mid] < target){
+                left = mid+1;
+            }else{
+                right = mid-1;
+            }
+        }
+        return new int[]{start, end};
     }
 }
