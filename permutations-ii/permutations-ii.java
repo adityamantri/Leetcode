@@ -1,28 +1,26 @@
 class Solution {
-
-    public void backtrack(int[] nums, boolean[] used, List<List<Integer>> result, List<Integer> curr){
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums);
+        recurse(nums, res, new ArrayList<>(), new boolean[nums.length]);
+        return res;
+    }
+    
+    public void recurse(int[] nums, List<List<Integer>> res, List<Integer> curr, boolean[] visited){
         if(curr.size() == nums.length){
-            result.add(new ArrayList<>(curr));
+            res.add(new ArrayList<>(curr));
             return;
         }
-
+        
         for(int i = 0; i < nums.length; i++){
-            // to avoid used or duplicates that occur consecutively [1,1,2]
-            // here result with indexes [0,1,2] and [1,0,2] will result in [1,1,2]
-            // we just check that the previous is same and not used
-            if(used[i] || i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
-            used[i] = true;
+            if(visited[i] || i > 0 && nums[i] == nums[i-1] && visited[i-1]){
+                continue;
+            }
+            visited[i] = true;
             curr.add(nums[i]);
-            backtrack(nums, used, result, curr);
+            recurse(nums, res, curr, visited);
             curr.remove(curr.size()-1);
-            used[i] = false;
+            visited[i] = false;
         }
-    }
-
-    public List<List<Integer>> permuteUnique(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> result = new ArrayList<>();
-        backtrack(nums, new boolean[nums.length], result, new ArrayList<>());
-        return result;
     }
 }
