@@ -1,44 +1,47 @@
 class LRUCache {
-    class Node{
-        int key, value;
-        Node prev, next;
-        public Node(){}
-        public Node(int key, int value){
+    class Node {
+        int key;
+        int val;
+        Node next;
+        Node prev;
+        public Node(int key, int val){
             this.key = key;
-            this.value = value;
+            this.val = val;
         }
     }
     
     Map<Integer, Node> map;
-    Node head, tail;
     int cap;
+    Node head;
+    Node tail;
+    
     public LRUCache(int capacity) {
-        cap = capacity;
-        head = new Node();
-        tail = new Node();
+        this.cap = capacity;
         map = new HashMap<>();
-        head.next = tail;
+        head = new Node(-1, -1);
+        tail = new Node(-1, -1);
         tail.prev = head;
+        head.next = tail;
     }
     
     public int get(int key) {
-        Node n = map.get(key);
-        if(n == null)
+        if(!map.containsKey(key)){
             return -1;
-        delete(n);
+        }
+        Node n = map.get(key);
+        remove(n);
         add(n);
-        return n.value;
-        
+        return n.val;
     }
     
     public void put(int key, int value) {
+        
         if(map.containsKey(key)){
-            delete(map.get(key));
-            map.remove(key);
-        }
-        if(map.size() == cap){
-            map.remove(tail.prev.key);
-            delete(tail.prev);
+            remove(map.get(key));
+        }else if(map.size() == cap){
+            Node del = tail.prev;
+            remove(del);
+            map.remove(del.key);
         }
         Node n = new Node(key, value);
         map.put(key, n);
@@ -46,20 +49,15 @@ class LRUCache {
     }
     
     public void add(Node n){
-        // map.put(n.key, n);
-        Node next = head.next;
+        n.next = head.next;
         head.next = n;
-        next.prev = n;
-        n.next = next;
+        n.next.prev = n;
         n.prev = head;
     }
     
-    public void delete(Node n){
-        // map.remove(n.value);
-        Node next = n.next;
-        Node prev = n.prev;
-        next.prev = prev;
-        prev.next = next;
+    public void remove(Node n){
+        n.prev.next = n.next;
+        n.next.prev = n.prev;
     }
 }
 
